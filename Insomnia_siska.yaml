@@ -1,0 +1,144 @@
+type: collection.insomnia.rest/5.0
+name: FLASK API
+meta:
+  id: wrk_f82e34d06d6243008ed22734afc9799d
+  created: 1746707378948
+  modified: 1746707378948
+collection:
+  - url: http://127.0.0.1:5000/songs
+    name: lihat semua id
+    meta:
+      id: req_2f580a8c7d6649fd96a15af3790424ff
+      created: 1746707378957
+      modified: 1746709013367
+      isPrivate: false
+      sortKey: -1741837747495
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/10.3.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://127.0.0.1:5000/songs
+    name: buat id baru
+    meta:
+      id: req_578d936eacb74322ac5f0c6e9d5be740
+      created: 1746707378959
+      modified: 1746709008114
+      isPrivate: false
+      sortKey: -1741837747595
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "judul_lagu": "Bohemian Rhapsody",
+          "artis": "Queen",
+          "tahun_rilis": 1975,
+          "durasi": "5:55",
+          "genre": "Rock"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/10.3.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://127.0.0.1:5000/songs/2
+    name: ganti data
+    meta:
+      id: req_2db4a544fc4242539f34841bbc109d51
+      created: 1746707378960
+      modified: 1746709270022
+      isPrivate: false
+      sortKey: -1741837746054.75
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "judul_lagu": "Drip",
+          "artis": "Baby Monster",
+          "tahun_rilis": 2024,
+          "durasi": "3:25",
+          "genre": "Kpop"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/10.3.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://127.0.0.1:5000/songs/1
+    name: hapus data
+    meta:
+      id: req_c80cc24fafef4e63a01a29962c8a8997
+      created: 1746707378962
+      modified: 1746709097287
+      isPrivate: false
+      sortKey: -1741837744614.5
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/10.3.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://127.0.0.1:5000/songs/2
+    name: lihat per id
+    meta:
+      id: req_e3cbbb518c35462ab1eb99ce04269b74
+      created: 1746708711009
+      modified: 1746709221797
+      isPrivate: false
+      sortKey: -1741837746774.875
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_93ee23aba0894b04b15979815f0788e9
+    created: 1746707378954
+    modified: 1746707378954
+environments:
+  name: Base Environment
+  meta:
+    id: env_e61bfe55a13c441eadea9c030f4993e2
+    created: 1746707378951
+    modified: 1746707378951
+    isPrivate: false

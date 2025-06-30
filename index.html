@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manajemen Lagu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid hsl(134, 47%, 18%);
+        }
+        th {
+            background-color: hsl(334, 52%, 43%);
+        }
+    </style>
+</head>
+<body>
+
+<h2>Tambah Lagu</h2>
+<form id="songForm">
+    <input type="text" id="judul_lagu" placeholder="Judul Lagu" required>
+    <input type="text" id="artis" placeholder="Artis" required>
+    <input type="number" id="tahun_rilis" placeholder="Tahun Rilis" required>
+    <input type="number" step="0.1" id="durasi" placeholder="Durasi (menit)" required>
+    <input type="text" id="genre" placeholder="Genre" required>
+    <button type="submit">Tambah</button>
+</form>
+
+<h2>Daftar Lagu</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Judul Lagu</th>
+            <th>Artis</th>
+            <th>Tahun</th>
+            <th>Durasi</th>
+            <th>Genre</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody id="songList"></tbody>
+</table>
+
+<script>
+    const API_URL = 'http://localhost:5000/songs';
+
+    async function fetchSongs() {
+        const res = await fetch(API_URL);
+        const songs = await res.json();
+        const tbody = document.getElementById('songList');
+        tbody.innerHTML = '';
+        songs.forEach(song => {
+            const row = `
+                <tr>
+                    <td>${song.id}</td>
+                    <td>${song.judul_lagu}</td>
+                    <td>${song.artis}</td>
+                    <td>${song.tahun_rilis}</td>
+                    <td>${song.durasi}</td>
+                    <td>${song.genre}</td>
+                    <td><button onclick="deleteSong(${song.id})">Hapus</button></td>
+                </tr>
+            `;
+            tbody.innerHTML += row;
+        });
+    }
+
+    async function deleteSong(id) {
+        await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+        fetchSongs();
+    }
+
+    document.getElementById('songForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = {
+            judul_lagu: document.getElementById('judul_lagu').value,
+            artis: document.getElementById('artis').value,
+            tahun_rilis: parseInt(document.getElementById('tahun_rilis').value),
+            durasi: parseFloat(document.getElementById('durasi').value),
+            genre: document.getElementById('genre').value
+        };
+
+        await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        document.getElementById('songForm').reset();
+        fetchSongs();
+    });
+
+    fetchSongs();
+</script>
+
+</body>
+</html>
